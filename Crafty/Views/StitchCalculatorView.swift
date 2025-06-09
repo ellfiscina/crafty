@@ -18,11 +18,11 @@ struct StitchCalculatorView: View {
     @State private var showResults = false
 
     var isCurrentValid: Bool {
-        Int(currentStitchCount) != nil && Int(currentStitchCount)! > 0
+        currentStitchCount.isPositiveInteger
     }
 
     var isDesiredValid: Bool {
-        Int(desiredStitchCount) != nil && Int(desiredStitchCount)! > 0
+        desiredStitchCount.isPositiveInteger
     }
 
     var isFormValid: Bool {
@@ -43,15 +43,11 @@ struct StitchCalculatorView: View {
                         )
                         .keyboardType(.numberPad)
                         .onChange(of: currentStitchCount) {
-                            // Clear results and errors on input change
-                            showResults = false
-                            errorMessage = nil
+                            reset()
                         }
 
                         if !isCurrentValid && !currentStitchCount.isEmpty {
-                            Text("Enter a positive integer")
-                                .foregroundColor(.red)
-                                .font(.caption)
+                            ErrorMessageView()
                         }
                     }
 
@@ -62,8 +58,7 @@ struct StitchCalculatorView: View {
                         )
                         .keyboardType(.numberPad)
                         .onChange(of: desiredStitchCount) {
-                            showResults = false
-                            errorMessage = nil
+                            reset()
                         }
 
                         if !isDesiredValid && !desiredStitchCount.isEmpty {
@@ -75,14 +70,10 @@ struct StitchCalculatorView: View {
                 }
 
                 if showResults {
-                    Section(header: Text("Instructions - Flat Knitting")) {
-                        InstructionView(text: flatInstruction)
-                    }
-
-                    Section(
-                        header: Text("Instructions - Knitting in the Round")
-                    ) {
-                        InstructionView(text: roundInstruction)
+                    let actionType = (Int(currentStitchCount) ?? 0) < (Int(desiredStitchCount) ?? 0) ? "Increase" : "Decrease"
+                    Section(header: Text("Instructions - \(actionType)")) {
+                        InstructionView(text: "Flat knitting: \(flatInstruction)")
+                        InstructionView(text: "In the round: \(roundInstruction)")
                     }
                 }
 
@@ -105,6 +96,11 @@ struct StitchCalculatorView: View {
         }
     }
 
+    func reset() {
+        showResults = false
+        errorMessage = nil
+    }
+    
     private func calculate() {
         guard let current = Int(currentStitchCount),
             let desired = Int(desiredStitchCount)
@@ -138,7 +134,7 @@ struct InstructionView: View {
     @State private var copied = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        HStack(spacing: 8) {
             Text(text)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.vertical, 4)

@@ -10,9 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Text("Hello, World!")
-        }
+        ProjectListView()
     }
 }
 

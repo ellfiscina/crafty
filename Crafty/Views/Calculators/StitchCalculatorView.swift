@@ -93,6 +93,7 @@ struct StitchCalculatorView: View {
                 }
             }
             .navigationTitle("Stitch Calculator")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 

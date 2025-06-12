@@ -39,9 +39,9 @@ struct GaugeCalculatorView: View {
                 Text(
                     """
                     Use this calculator to adjust your stitch count based on your knitting gauge.
-                    
+
                     Enter the number of stitches and width from your current gauge swatch, then enter your desired final width.
-                    
+
                     The calculator will tell you how many stitches to cast on to achieve the target width.
                     """
                 )
@@ -114,6 +114,7 @@ struct GaugeCalculatorView: View {
                 }
             }
             .navigationTitle("Gauge Calculator")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
@@ -133,7 +134,8 @@ struct GaugeCalculatorView: View {
         }
 
         let desiredStitchCount = gaugeCountInt * finalWidthInt / gaugeWidthInt
-        result = "You need to cast on \(desiredStitchCount) stitches to achieve the desired width."
+        result =
+            "You need to cast on \(desiredStitchCount) stitches to achieve the desired width."
         showResults = true
     }
 }

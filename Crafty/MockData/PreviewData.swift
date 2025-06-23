@@ -5,8 +5,11 @@
 //  Created by Ellen Fiscina on 2025-06-11.
 //
 
+import Fakery
 import Foundation
 import SwiftData
+
+let faker = Faker()
 
 func createInMemoryContainer() -> ModelContainer {
     try! ModelContainer(
@@ -27,21 +30,31 @@ func createMockYarn() -> Yarn {
     )
 }
 
-func mockProjectDetail() -> Project {
-    let yarn = createMockYarn()
-
+func createMockProject() -> Project {
     return Project(
         title: "Scarf",
         needleSize: 4.25,
         size: "No size",
-        yarns: [yarn],
+        yarns: [],
         craft: .knitting,
         status: .started,
         startDate: Date.now,
-        notes: """
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt vestibulum libero. Suspendisse gravida posuere enim in porta. Nullam non risus urna. Ut ut lectus urna. Donec eros ante, faucibus ac sem eu, congue lacinia nisl. Integer facilisis consequat justo. Sed viverra id massa at ultricies. Aenean at lobortis urna. Vivamus luctus suscipit lectus, ut elementum augue consequat eget. Nulla tristique molestie lectus, sit amet sodales ligula consectetur ut. Vestibulum pellentesque semper metus a convallis.
-            """
+        notes: faker.lorem.paragraph()
     )
+}
+
+func mockProjectDetail() -> Project {
+    let yarn = createMockYarn()
+    let project = createMockProject()
+    project.yarns.append(yarn)
+    
+    return project
+}
+
+func randomPastDate() -> Date {
+    let secondsInDay: Int = 86400
+    let randomInterval = TimeInterval(Int.random(in: 0..<10) * secondsInDay)
+    return Date().addingTimeInterval(-randomInterval)
 }
 
 @MainActor func mockContainerForProjectList() -> ModelContainer {
@@ -55,12 +68,12 @@ func mockProjectDetail() -> Project {
         let status = Status.allCases.randomElement()!
         let project = Project(
             title: "Project \(i)",
-            needleSize: 3.5 + Double(i),
+            needleSize: faker.number.randomDouble(min: 2.5, max:6),
             size: "Size \(i)",
             yarns: [yarn],
             craft: Craft.allCases.randomElement()!,
             status: status,
-            startDate: status == .planning ? nil : Date(),
+            startDate: status == .planning ? nil : randomPastDate(),
             endDate: status == .finished ? Date() : nil
         )
         context.insert(project)

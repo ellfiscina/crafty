@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		346537882E09561900E1C5A3 /* Fakery in Frameworks */ = {isa = PBXBuildFile; productRef = 346537872E09561900E1C5A3 /* Fakery */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3417C6BE2DF0472600957634 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				346537882E09561900E1C5A3 /* Fakery in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Crafty;
 			packageProductDependencies = (
+				346537872E09561900E1C5A3 /* Fakery */,
 			);
 			productName = Crafty;
 			productReference = 3417C6AE2DF0472400957634 /* Crafty.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 3417C6A52DF0472300957634;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				346537862E09561900E1C5A3 /* XCRemoteSwiftPackageReference "Fakery" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3417C6AF2DF0472400957634 /* Products */;
 			projectDirPath = "";
@@ -329,6 +338,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -384,6 +394,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -395,6 +406,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -422,6 +434,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -550,6 +563,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		346537862E09561900E1C5A3 /* XCRemoteSwiftPackageReference "Fakery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vadymmarkov/Fakery";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		346537872E09561900E1C5A3 /* Fakery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 346537862E09561900E1C5A3 /* XCRemoteSwiftPackageReference "Fakery" */;
+			productName = Fakery;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3417C6A62DF0472300957634 /* Project object */;
 }

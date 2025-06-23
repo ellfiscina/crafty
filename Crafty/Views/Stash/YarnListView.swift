@@ -22,6 +22,7 @@ struct YarnListView: View {
                         YarnRowView(yarn: yarn)
                     }
                 }
+                .onDelete(perform: deleteYarns)
             }
             .sheet(isPresented: $showingAddYarnSheet) {
                 AddYarnView(project: nil)
@@ -40,6 +41,13 @@ struct YarnListView: View {
                     }
                 }
             }
+        }
+    }
+    
+    func deleteYarns(at offsets: IndexSet) {
+        for index in offsets {
+            let yarn = yarns[index]
+            modelContext.delete(yarn)
         }
     }
 }

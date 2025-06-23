@@ -20,11 +20,20 @@ struct ProjectListView: View {
                         ProjectRowView(project: project)
                     }
                 }
+                .onDelete(perform: deleteProjects)
+
             }
             .navigationDestination(for: Project.self) { project in
                 ProjectDetailView(project: project)
             }
             .navigationTitle("Projects")
+        }
+    }
+    
+    func deleteProjects(at offsets: IndexSet) {
+        for index in offsets {
+            let project = projects[index]
+            modelContext.delete(project)
         }
     }
 }

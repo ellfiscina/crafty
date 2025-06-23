@@ -82,3 +82,29 @@ func randomPastDate() -> Date {
     try! context.save()
     return container
 }
+
+@MainActor func mockContainerForYarnList() -> ModelContainer {
+    let container = createInMemoryContainer()
+    let context = container.mainContext
+
+    let project = createMockProject()
+    context.insert(project)
+
+    for _ in 1...5 {
+        let yarn = Yarn(
+            name: faker.commerce.productName(),
+            maker: faker.company.name(),
+            color: faker.commerce.color(),
+            weight: [50, 100, 250].randomElement()!,
+            yardage: faker.number.randomInt(min: 200, max: 1000),
+            material: ["Cotton", "Wool", "Akryl"].randomElement()!,
+            amount: faker.number.randomInt(min: 0, max: 10),
+        )
+        
+        yarn.projects.insert(project, at: yarn.projects.endIndex)
+        context.insert(yarn)
+    }
+
+    try! context.save()
+    return container
+}

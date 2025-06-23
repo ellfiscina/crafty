@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct YarnRowView: View {
+    let yarn: Yarn
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(yarn.name)
+                    .font(.headline)
+                Text("\(yarn.amount)")
+                    .foregroundStyle(.gray)
+            }
+        }
     }
 }
 
 #Preview {
-    YarnRowView()
+    YarnRowView(yarn: createMockYarn())
 }

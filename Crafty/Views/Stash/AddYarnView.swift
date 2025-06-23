@@ -10,7 +10,7 @@ import SwiftData
 
 struct AddYarnView: View {
     @Environment(\.modelContext) private var modelContext
-    let project: Project
+    let project: Project?
 
     @Environment(\.dismiss) private var dismiss
 
@@ -22,6 +22,18 @@ struct AddYarnView: View {
     @State private var material = ""
     @State private var amount = ""
 
+    var isWeightValid: Bool {
+        weight.isPositiveInteger
+    }
+    
+    var isYardageValid: Bool {
+        yardage.isPositiveInteger
+    }
+    
+    var isAmountValid: Bool {
+        amount.isPositiveInteger
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -61,9 +73,12 @@ struct AddYarnView: View {
             material: material,
             amount: Int(amount) ?? 0
         )
-        newYarn.projects.append(project)
-        project.yarns.append(newYarn)
-
+        
+        if let project {
+            newYarn.projects.append(project)
+            project.yarns.append(newYarn)
+        }
+        
         modelContext.insert(newYarn)
 
         dismiss()

@@ -132,12 +132,3 @@ func formatDate(_ date: Date) -> String {
         ProjectDetailView(project: mockProjectDetail())
     }
 }
-
-//var size: String
-//var yarns: [Yarn]
-//var craft: Craft
-//var status: Status
-//var createdAt: Date
-//var startDate: Date?
-//var endDate: Date?
-//var notes: String?

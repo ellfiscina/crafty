@@ -61,9 +61,9 @@ struct ProjectDetailView: View {
                     Button("Add Yarn") {
                         showingAddYarnSheet = true
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.bordered)
                 }
-
+                
                 if project.yarns.isEmpty {
                     Text("No yarn information")
                         .foregroundColor(.secondary)
@@ -113,18 +113,6 @@ struct ProjectDetailView: View {
             modelContext.delete(yarn)
         }
     }
-}
-
-func formatNeedleSize(_ value: Double) -> String {
-    let formatter = NumberFormatter()
-    formatter.minimumFractionDigits = 0
-    formatter.maximumFractionDigits = 2
-    formatter.numberStyle = .decimal
-    return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
-}
-
-func formatDate(_ date: Date) -> String {
-    return date.formatted(date: .abbreviated, time: .omitted)
 }
 
 #Preview {

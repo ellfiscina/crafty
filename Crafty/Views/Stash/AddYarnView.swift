@@ -5,14 +5,14 @@
 //  Created by Ellen Fiscina on 2025-06-11.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct AddYarnView: View {
     @Environment(\.modelContext) private var modelContext
-    let project: Project?
-
     @Environment(\.dismiss) private var dismiss
+
+    let project: Project?
 
     @State private var name = ""
     @State private var color = ""

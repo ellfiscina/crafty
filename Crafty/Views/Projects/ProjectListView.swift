@@ -12,6 +12,8 @@ struct ProjectListView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Project.createdAt, order: .reverse) var projects: [Project]
     
+    @State var showingAddProjectSheet: Bool = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -26,7 +28,20 @@ struct ProjectListView: View {
             .navigationDestination(for: Project.self) { project in
                 ProjectDetailView(project: project)
             }
+            .sheet(isPresented: $showingAddProjectSheet) {
+                AddProjectView()
+                    .environment(\.modelContext, modelContext)
+            }
             .navigationTitle("Projects")
+            .toolbar {
+                ToolbarItem() {
+                    Button {
+                        showingAddProjectSheet = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
     }
     

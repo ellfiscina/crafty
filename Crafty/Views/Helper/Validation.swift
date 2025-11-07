@@ -14,4 +14,11 @@ extension String {
         }
         return false
     }
+    
+    var isNotEmptyString: Bool {
+        if self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return false
+        }
+        return true
+    }
 }

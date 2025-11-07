@@ -23,41 +23,68 @@ struct AddYarnView: View {
     @State private var amount = ""
 
     var isWeightValid: Bool {
-        weight.isPositiveInteger
+        weight.isEmpty || weight.isPositiveInteger
     }
     
     var isYardageValid: Bool {
-        yardage.isPositiveInteger
+        yardage.isEmpty || yardage.isPositiveInteger
     }
     
     var isAmountValid: Bool {
-        amount.isPositiveInteger
+        amount.isEmpty || amount.isPositiveInteger
+    }
+    
+    var isNameValid: Bool {
+        name.isNotEmptyString
+    }
+    
+    var isColorValid: Bool {
+        color.isNotEmptyString
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("Yarn Details") {
                     TextField("Name", text: $name)
                     TextField("Color", text: $color)
                     TextField("Maker", text: $maker)
-                    TextField("Weight (g)", text: $weight)
+                    VStack(alignment: .leading) {
+                        TextField("Weight (g)", text: $weight)
                         .keyboardType(.numberPad)
-                    TextField("Yardage (m)", text: $yardage)
+
+                        if !isWeightValid {
+                            ErrorMessageView()
+                        }
+                    }
+                    VStack(alignment: .leading) {
+                        TextField("Yardage (m)", text: $yardage)
                         .keyboardType(.numberPad)
+
+                        if !isYardageValid {
+                            ErrorMessageView()
+                        }
+                    }
                     TextField("Material", text: $material)
-                    TextField("Amount", text: $amount)
+                    VStack(alignment: .leading) {
+                        TextField("Amount", text: $amount)
                         .keyboardType(.numberPad)
+
+                        if !isAmountValid {
+                            ErrorMessageView()
+                        }
+                    }
                 }
             }
             .navigationTitle("Add Yarn")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save", action: save)
-                        .disabled(name.isEmpty || color.isEmpty)
+                    Button("Save", systemImage: "checkmark", action: save)
+                        .disabled(!(isNameValid || isColorValid))
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: { dismiss() })
+                    Button("Cancel", systemImage: "xmark", action: { dismiss() })
                 }
             }
         }

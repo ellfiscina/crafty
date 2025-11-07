@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct ErrorMessageView: View {
+    let message: String
+    
+    init(message: String = "Enter a positive integer") {
+        self.message = message
+    }
+    
     var body: some View {
-        Text("Enter a positive integer")
+        Text(message)
             .foregroundColor(.red)
             .font(.caption)
     }

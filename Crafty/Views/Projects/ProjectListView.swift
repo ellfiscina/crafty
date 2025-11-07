@@ -34,7 +34,7 @@ struct ProjectListView: View {
             }
             .navigationTitle("Projects")
             .toolbar {
-                ToolbarItem() {
+                ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddProjectSheet = true
                     } label: {

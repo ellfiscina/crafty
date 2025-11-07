@@ -45,7 +45,6 @@ struct ProjectDetailView: View {
                     Text(
                         "Needle Size: \(formatNeedleSize(project.needleSize))mm"
                     )
-                    Text("Size: \(project.size)")
                     Text("Craft: \(project.craft.rawValue.capitalized)")
                     Text("Status: \(project.status.rawValue.capitalized)")
                 }
@@ -61,7 +60,7 @@ struct ProjectDetailView: View {
                     Button("Add Yarn") {
                         showingAddYarnSheet = true
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.borderedProminent)
                 }
                 
                 if project.yarns.isEmpty {

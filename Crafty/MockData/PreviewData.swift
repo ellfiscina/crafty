@@ -34,7 +34,6 @@ func createMockProject() -> Project {
     return Project(
         title: "Scarf",
         needleSize: 4.25,
-        size: "No size",
         yarns: [],
         craft: .knitting,
         status: .started,
@@ -69,7 +68,6 @@ func randomPastDate() -> Date {
         let project = Project(
             title: "Project \(i)",
             needleSize: faker.number.randomDouble(min: 2.5, max:6),
-            size: "Size \(i)",
             yarns: [yarn],
             craft: Craft.allCases.randomElement()!,
             status: status,

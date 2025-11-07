@@ -23,7 +23,6 @@ enum Status: String, Codable, CaseIterable {
 final class Project {
     var title: String
     var needleSize: Double
-    var size: String
     var yarns: [Yarn]
     var craft: Craft
     var status: Status
@@ -33,10 +32,9 @@ final class Project {
     var notes: String?
 
     
-    init(title: String, needleSize: Double, size: String, yarns: [Yarn], craft: Craft, status: Status, startDate: Date? = nil, endDate: Date? = nil, notes: String? = nil) {
+    init(title: String, needleSize: Double, yarns: [Yarn], craft: Craft, status: Status, startDate: Date? = nil, endDate: Date? = nil, notes: String? = nil) {
         self.title = title
         self.needleSize = needleSize
-        self.size = size
         self.notes = notes
         self.yarns = yarns
         self.craft = craft

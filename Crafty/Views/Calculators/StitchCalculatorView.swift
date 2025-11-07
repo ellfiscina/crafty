@@ -18,11 +18,11 @@ struct StitchCalculatorView: View {
     @State private var showResults = false
 
     var isCurrentValid: Bool {
-        currentStitchCount.isPositiveInteger
+        currentStitchCount.isEmpty || currentStitchCount.isPositiveInteger
     }
 
     var isDesiredValid: Bool {
-        desiredStitchCount.isPositiveInteger
+        desiredStitchCount.isEmpty || desiredStitchCount.isPositiveInteger
     }
 
     var isFormValid: Bool {
@@ -30,7 +30,7 @@ struct StitchCalculatorView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Text(
                     "To calculate how to increase or decrease your stitch count evenly, please enter your current and desired stitch count below."
@@ -46,7 +46,7 @@ struct StitchCalculatorView: View {
                             reset()
                         }
 
-                        if !isCurrentValid && !currentStitchCount.isEmpty {
+                        if !isCurrentValid {
                             ErrorMessageView()
                         }
                     }
@@ -61,10 +61,8 @@ struct StitchCalculatorView: View {
                             reset()
                         }
 
-                        if !isDesiredValid && !desiredStitchCount.isEmpty {
-                            Text("Enter a positive integer")
-                                .foregroundColor(.red)
-                                .font(.caption)
+                        if !isDesiredValid {
+                            ErrorMessageView()
                         }
                     }
                 }

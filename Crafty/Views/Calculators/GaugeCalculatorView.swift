@@ -105,13 +105,7 @@ struct GaugeCalculatorView: View {
                     }
                 }
 
-                Section {
-                    Button("Calculate") {
-                        calculate()
-                    }
-                    .disabled(!isFormValid)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                }
+                FullWidthButtonView(action: calculate)
             }
             .navigationTitle("Gauge Calculator")
             .navigationBarTitleDisplayMode(.inline)

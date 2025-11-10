@@ -33,17 +33,18 @@ struct YarnListView: View {
             }
             .navigationTitle("Yarn Stash")
             .toolbar {
-                ToolbarItem() {
+                ToolbarItem {
                     Button {
                         showingAddYarnSheet = true
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .buttonStyle(.glassProminent)
                 }
             }
         }
     }
-    
+
     func deleteYarns(at offsets: IndexSet) {
         for index in offsets {
             let yarn = yarns[index]

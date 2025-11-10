@@ -18,11 +18,11 @@ struct StitchCalculatorView: View {
     @State private var showResults = false
 
     var isCurrentValid: Bool {
-        currentStitchCount.isEmpty || currentStitchCount.isPositiveInteger
+        currentStitchCount.isPositiveInteger
     }
 
     var isDesiredValid: Bool {
-        desiredStitchCount.isEmpty || desiredStitchCount.isPositiveInteger
+        desiredStitchCount.isPositiveInteger
     }
 
     var isFormValid: Bool {
@@ -46,7 +46,7 @@ struct StitchCalculatorView: View {
                             reset()
                         }
 
-                        if !isCurrentValid {
+                        if !isCurrentValid && !currentStitchCount.isEmpty {
                             ErrorMessageView()
                         }
                     }
@@ -61,17 +61,24 @@ struct StitchCalculatorView: View {
                             reset()
                         }
 
-                        if !isDesiredValid {
+                        if !isDesiredValid && !desiredStitchCount.isEmpty {
                             ErrorMessageView()
                         }
                     }
                 }
 
                 if showResults {
-                    let actionType = (Int(currentStitchCount) ?? 0) < (Int(desiredStitchCount) ?? 0) ? "Increase" : "Decrease"
+                    let actionType =
+                        (Int(currentStitchCount) ?? 0)
+                            < (Int(desiredStitchCount) ?? 0)
+                        ? "Increase" : "Decrease"
                     Section(header: Text("Instructions - \(actionType)")) {
-                        InstructionView(text: "Flat knitting: \(flatInstruction)")
-                        InstructionView(text: "In the round: \(roundInstruction)")
+                        InstructionView(
+                            text: "Flat knitting: \(flatInstruction)"
+                        )
+                        InstructionView(
+                            text: "In the round: \(roundInstruction)"
+                        )
                     }
                 }
 
@@ -82,13 +89,7 @@ struct StitchCalculatorView: View {
                     }
                 }
 
-                Section {
-                    Button("Calculate") {
-                        calculate()
-                    }
-                    .disabled(!isFormValid)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                }
+                FullWidthButtonView(action: calculate)
             }
             .navigationTitle("Stitch Calculator")
             .navigationBarTitleDisplayMode(.inline)
@@ -99,7 +100,7 @@ struct StitchCalculatorView: View {
         showResults = false
         errorMessage = nil
     }
-    
+
     private func calculate() {
         guard let current = Int(currentStitchCount),
             let desired = Int(desiredStitchCount)

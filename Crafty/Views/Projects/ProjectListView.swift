@@ -11,9 +11,9 @@ import SwiftUI
 struct ProjectListView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Project.createdAt, order: .reverse) var projects: [Project]
-    
+
     @State var showingAddProjectSheet: Bool = false
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -40,11 +40,13 @@ struct ProjectListView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .buttonStyle(.glassProminent)
                 }
             }
+
         }
     }
-    
+
     func deleteProjects(at offsets: IndexSet) {
         for index in offsets {
             let project = projects[index]
